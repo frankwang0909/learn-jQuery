@@ -1,10 +1,10 @@
-# 触发事件处理函数
+# 触发事件处理函数（Event  Handlers)
 
 jQuery 提供了一个`.trigger()` 方法，可以在没有用户交互时，触发绑定到元素上的 事件处理函数（event handlers） 的方法。
 
 ## 1.哪些事件处理函数可以被`.trigger()`触发?
 
-jQuery 的事件处理系统是建立在 原生浏览器事件之上的。使用  `.on( "click", function() {...} )` 增加的事件处理函数，可以通过 jQuery 的` .trigger( "click " )` 触发，是因为jQuery 在这个事件处理函数被添加时，存储了这个函数的引用。
+jQuery 的事件处理系统是建立在 原生浏览器事件之上的。使用  `.on( "click", function() {...} )` 增加的事件处理函数，可以通过 jQuery 的` .trigger( "click " )` 触发，是因为jQuery 在这个事件处理函数被添加时，存储了这个事件处理函数的引用(reference)。
 
 除此之外，它将在 （HTML标签的）`onclick `属性上内触发这段 JavaScript 代码（即这个事件处理函数）。
 
@@ -19,13 +19,10 @@ jQuery 的事件处理系统是建立在 原生浏览器事件之上的。使用
 $( "a" ).trigger( "click" );
 ```
 
+
 ## 2.如果不能使用`.trigger()`，如何模拟原生的浏览器事件？
 
-In order to trigger a native browser event, you have to use [document.createEventObject](http://msdn.microsoft.com/en-us/library/ie/ms536390%28v=vs.85%29.aspx) for < IE9 and [document.createEvent](https://developer.mozilla.org/en-US/docs/Web/API/Document/createEvent)for all other browsers. Using these two APIs, you can programmatically create an event that behaves exactly as if someone has actually clicked on a file input box. The default action will happen, and the browse file dialog will display.
-
 为了触发原生浏览器事件，针对IE9，必须使用 [document.createEventObject](http://msdn.microsoft.com/en-us/library/ie/ms536390%28v=vs.85%29.aspx)  ， 其他浏览器使用  [document.createEvent](https://developer.mozilla.org/en-US/docs/Web/API/Document/createEvent) 。通过这两个 API, 我们可以创建一个事件，它看起来就像是有人真地点击了一个文件上传控件。
-
-The jQuery UI Team created [jquery.simulate.js](https://github.com/jquery/jquery-simulate/) in order to simplify triggering a native browser event for use in their automated testing. Its usage is modeled after jQuery's trigger.
 
   ` jQuery UI` 团队为了简化在他们自动化测试中使用的原生浏览器事件的触发， 创建了 [jquery.simulate.js](https://github.com/jquery/jquery-simulate/) 。 它的用法模仿了jQuery的`trigger()`。
 
@@ -51,7 +48,7 @@ $( "a" ).simulate( "click" );
 
 ## 4.不要使用 `.trigger()` 直接去执行具体的函数
 
-虽然这个 `.trigger()` 方法有用，但它不应该去直接调用一个处理点击事件的函数。相反，我们应该把想要调用的函数存在一个变量中，在绑定事件时把这个变量名作为参数传进去。之后，我们可以在任何时候调用这个函数，而不需要使用 `.trigger()`.
+虽然这个 `.trigger()` 方法有用，但它不应该去直接调用一个处理点击事件的函数。相反，我们应该把想要调用的函数存在一个`变量`中，在绑定事件时把这个`变量名`作为参数传进去。之后，我们可以在任何时候调用这个函数，而不需要使用 `.trigger()`.
 
 ```javascript
 // Triggering an event handler the right way
@@ -70,5 +67,5 @@ foo(); // instead of $( "p" ).trigger( "click" )
 使用 [jQuery 插件](https://gist.github.com/661855) 的[发布-订阅 模式](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) 可以构建更加复杂的触发事件的架构。运用这项技术，`trigger()` 可以用于 通知其他部分的代码 应用的某个事件发生了。
 
 
-[本文翻译自 http://learn.jquery.com](http://learn.jquery.com/events/triggering-event-handlers/)
+本文翻译自 [http://learn.jquery.com](http://learn.jquery.com/events/triggering-event-handlers/)
 
