@@ -1,8 +1,6 @@
-# jQuery 事件的发展史
+# jQuery Events 历史
 
-贯穿整个 jQuery 的进化史，事件绑定的方式 由于从性能表现到语法语义等许多原因而发生过改变。jQuery 1.7 版开始，`.on()` 方法作为直接绑定事件以及创建委托代理事件的方式。
-
-Given the following HTML, for our example we want to log the text of the each `<li>` to console whenever it is clicked.
+贯穿整个 jQuery 的进化史，事件绑定的方式 因为许多原因（从性能表现到语法语义等）而发生过改变。jQuery 1.7 版开始，`.on()` 方法作为直接绑定事件以及创建委托事件的方式。这篇文字旨在探讨事件委托(event delegation)从 jQuery 1.0版本到现在的历史以及每个版本是如何使用事件委托的。
 
 以下 HTML 代码作为示例，当它被点击时，我们想要在控制台中打印出每一个有`<li>` 。
 
@@ -128,4 +126,4 @@ The `.on()` method gives us a semantic approach for creating directly bound even
 
 以上所有的*事件委托*方式在它们发布之时，都曾是革命性且最好的实现方式。根据你所使用的 jQuery 版本，使用合适的*事件委托*方式。
 
-[本文翻译自 http://learn.jquery.com](http://learn.jquery.com/events/history-of-events/)
+本文翻译自 [http://learn.jquery.com](http://learn.jquery.com/events/history-of-events/)
