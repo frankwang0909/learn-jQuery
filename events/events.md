@@ -18,3 +18,5 @@ jQuery 提供了一些简单的方法用于绑定`事件处理函数（event han
 - [History of jQuery Events](http://learn.jquery.com/events/history-of-events/)
 - [Introducing Custom Events](http://learn.jquery.com/events/introduction-to-custom-events/)
 - [jQuery Event Extensions](http://learn.jquery.com/events/event-extensions/)
+
+本文翻译自[http://learn.jquery.com/events/](http://learn.jquery.com/events/)
