@@ -42,7 +42,7 @@ $( document ).ready(function(){
 
 ### 1.3 事件处理函数内部
 
-每个`事件处理函数`都接受一个`事件对象` 作为参数。 这个事件对象有许多属性和方法。它最常用的是使用`.preventDefault()` 方法来阻止默认行为。事件对象还包好了大量的其他有用的属性和方法，包括：
+每个`事件处理函数`都接受一个`事件对象 ` (event)  作为参数。 这个事件对象有许多属性和方法。它最常用的是使用`.preventDefault()` 方法来阻止默认行为。事件对象还包好了大量的其他有用的属性和方法，包括：
 
 #### 1.3.1 pageX, pageY
 
@@ -72,7 +72,7 @@ $( "input" ).on(
 );
 ```
 
-####1.3.5  target
+#### 1.3.5 target
 
 触发事件的 DOM 元素。
 
@@ -85,8 +85,6 @@ $( "input" ).on(
 事件发生时浏览器时间与 1970年1月1日时间差的毫秒数。
 
 #### 1.3.8 preventDefault()
-
-Prevent the default action of the event (e.g. following a link).
 
 阻止事件的默认行为（比如，跟随一个链接跳转）。
 
@@ -148,16 +146,12 @@ $( "p" ).off( ".myNamespace" ); // Unbind all events in the namespace
 
 ### 1.6 取消事件监听
 
-To remove an event listener, you use the `.off()` method and pass in the event type to off.
-
 为了删除事件监听，我们使用`.off()` 方法，参数为事件的类型。
 
 ```javascript
 // Tearing down all click handlers on a selection
 $( "p" ).off( "click" );
 ```
-
- If you attached a named function to the event, then you can isolate the event tear down to just that named function by passing it as the second argument.
 
 如果我们给这个事件绑定了一个命名的函数，我们可以通过将命名函数作为第二个参数传入的方式，单独取消这个事件。
 
@@ -184,8 +178,6 @@ function firstClick() {
     $( this ).click( function() { console.log( "You have clicked this before!" ); } );
 }
 ```
-
-Note that in the code snippet above, the `firstClick` function will be executed for the first click on *each* paragraph element rather than the function being removed from *all* paragraphs when *any* paragraph is clicked for the first time.
 
 注意：上述代码片段中， `firstClick` 函数将会在每一个段落元素被第一次点击时执行。当任意段落元素被第一次点击时，函数并不是从所有段落中移除。
 
