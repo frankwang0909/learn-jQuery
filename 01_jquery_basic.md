@@ -1,3 +1,4 @@
+# jQuery 基础知识
 
 ## 1.jQuery 优势：
 
@@ -217,4 +218,4 @@ $(function() {
 });
 ```
 
-与 `window 对象` 的 `onload 事件`的区别在于, `window.onload() ` 需要等所有资源（样式、图片、脚本等）加载完成，才会
+与 `window 对象` 的 `onload 事件`的区别在于, `window.onload() ` 需要等所有资源（样式、图片、脚本等）加载完成，才会执行。
