@@ -1,6 +1,6 @@
 # jQuery Events 历史
 
-贯穿整个 jQuery 的进化史，事件绑定的方式 因为许多原因（从性能表现到语法语义等）而发生过改变。jQuery 1.7 版开始，`.on()` 方法作为直接绑定事件以及创建委托事件的方式。这篇文字旨在探讨事件委托(event delegation)从 jQuery 1.0版本到现在的历史以及每个版本是如何使用事件委托的。
+贯穿整个 jQuery 的发展史，事件绑定的方式 因为许多原因（从性能表现到语法语义等）而发生过改变。jQuery 1.7 版开始，`.on()` 方法作为直接绑定事件以及创建委托事件的方式。这篇文字旨在探讨事件委托(event delegation)从 jQuery 1.0版本到现在的历史以及每个版本是如何使用事件委托的。
 
 以下 HTML 代码作为示例，当它被点击时，我们想要在控制台中打印出每一个有`<li>` 。
 
@@ -50,7 +50,7 @@ $( "#list" ).bind( "click", function( event ) {
 });
 ```
 
-我们可以利用 事件冒泡，将 click 事件绑定到父元素`<ul>` 上。 当`<li>` 被点击时，事件冒泡到父元素`<ul>` 上。父元素将会执行事件处理函数。我们的事件处理函数会检查`event.target` （触发事件的元素）是否与选择器匹配。
+我们可以利用 `事件冒泡`，将 `click` 事件绑定到父元素`<ul>` 上。 当`<li>` 被点击时，事件冒泡到父元素`<ul>` 上。父元素将会执行事件处理函数。我们的事件处理函数会检查`event.target` （触发事件的元素）是否与选择器匹配。
 
 ### 4.  [.live()](http://api.jquery.com/live/) (已弃用)
 
@@ -117,8 +117,6 @@ $( "#list" ).delegate( "li", "click", function( event ) {
 ### 7.  [.on()](http://api.jquery.com/on/)
 
 jQuery 1.7 版开始引入。
-
-The `.on()` method gives us a semantic approach for creating directly bound events as well as delegated events. It eliminates the need to use the deprecated `.bind()`, `.live()`, and `.delegate()` methods, providing a single API for creating events.
 
 `on()` 方法给了我们一种语义上的方法，可以直接绑定事件以及委托事件。它提供一个唯一的 用于创建事件的 API，使得那些弃用的`.bind()`， `.live()` 和`.delegate()` 等方法不再需要。
 
