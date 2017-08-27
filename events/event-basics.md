@@ -193,4 +193,4 @@ function firstEvent( eventObject ) {
 
 在这个例子中， `firstEvent`  函数会为每个事件执行一次。 这意味着，在上述代码片段中，一旦 input 元素获得焦点，事件处理函数仍然会因为第一次 keydown 事件而执行。
 
-本文翻译自[http://learn.jquery.com](http://learn.jquery.com/events/event-basics)S
+本文翻译自[http://learn.jquery.com](http://learn.jquery.com/events/event-basics)
