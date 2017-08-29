@@ -2,19 +2,27 @@
 
 ## 1.序言
 
-网页是关于交互的。用户执行无数的行为，比如在页面上移动鼠标光标，点击元素，在文本框输入。所有这些都是事件的例子。除了这些用户事件，还有大量的事件发生，比如当页面加载完成，但是视频开始播放或者暂停等。无论在页面发生了什么有趣的事情，事件都会被触发，即浏览器会宣布某事发生了。这个宣告允许开发者监听事件，并作出相应的响应。
+Web pages are all about interaction. Users perform a countless number of actions such as moving their mice over the page, clicking on elements, and typing in textboxes — all of these are examples of events. In addition to these user events, there are a slew of others that occur, like when the page is loaded, when video begins playing or is paused, etc. Whenever something interesting occurs on the page, an event is fired, meaning that the browser basically announces that something has happened. It's this announcement that allows developers to "listen" for events and react to them appropriately.
+
+网页是关于交互的。用户执行大量的行为，比如在页面上移动鼠标光标，点击元素，在文本框输入内容。所有这些都是事件的例子。除了这些用户事件，还有大量的事件发生，比如当页面加载完成，当视频开始播放或者暂停等。无论在页面发生了什么有趣的事情，事件都会被触发，即浏览器会宣布某事发生了。这个宣告允许开发者监听事件，并作出相应的响应。
 
 ## 2.什么是 DOM 事件?
 
-如上所述，事件有许多的类型，但是最容易理解的也许是用户事件，比如当某人点击了一个元素或者在表单中输入。这些类型的事件发生在元素上，即当用户点击了一个按钮，这个按钮上会发生事件。虽然用户交互不是唯一的 DOM 事件类型，但它们显然是在开始时最容易理解的。 Mozilla Developer Network
+As mentioned, there are a myriad of event types, but perhaps the ones that are easiest to understand are user events, like when someone clicks on an element or types into a form. These types of events occur on an element, meaning that when a user clicks on a button for example, the button has had an event occur on it. While user interactions aren't the only types of DOM events, they're certainly the easiest to understand when starting out. Mozilla Developer Network has a good reference of available DOM events.
 
-有一份关于[可用的 DOM 事件](https://developer.mozilla.org/en-US/docs/Web/Events)的参考手册。
+如上所述，事件有许多的类型，但是最容易理解的也许是用户事件，比如当某人点击了一个元素或者在表单中输入。这些类型的事件发生在元素上，即当用户点击了一个按钮，这个按钮上会发生事件。虽然用户交互不是唯一的 DOM 事件类型，但它们显然是在开始时最容易理解的。 Mozilla Developer Network 有一份关于[可用的 DOM 事件](https://developer.mozilla.org/en-US/docs/Web/Events)的参考手册。
 
 ## 3.监听事件的方法
 
-有许多方法可以监听事件。行为（事件）始终发生在网页，但只有监听了事件，开发者才能收到关于它们的通知。监听事件意味着等待浏览器告知指定的的事件发生了，然后指定网页如何响应。
+There are many ways to listen for events. Actions are constantly occurring on a webpage, but the developer is only notified about them if they're listening for them. Listening for an event basically means you're waiting for the browser to tell you that a specific event has occurred and then you'll specify how the page should react.
+
+有许多方法可以监听事件。行为（事件）始终发生在网页，但只有监听了事件，开发者才能收到关于它们的通知。监听事件意味着等待浏览器告知指定的事件发生了，然后规定网页如何作出响应。
+
+To specify to the browser what to do when an event occurs, you provide a function, also known as an event handler. This function is executed whenever the event occurs (or until the event is unbound).
 
 我们提供一个函数，通常也成为事件处理（event handler)，指定事件发生时浏览器要做什么。每次事件发生时，这个函数都会被执行，直到该事件被取消。
+
+For instance, to alert a message whenever a user clicks on a button, you might write something like this:
 
 例如，当用户点击一个按钮，弹出一条消息，我们可以写成这样：
 
@@ -22,14 +30,23 @@
 <button onclick="alert('Hello')">Say hello</button>
 ```
 
-我们想要监听的事件由这个按钮的`onclick` 属性指定， 事件处理函数即这个`alert` 函数， 它会弹出 “Hello” 给用户。虽然这种写法有用，但实现这项功能的这种方式是极糟糕的，原因如下：
+The event we want to listen to is specified by the button's onclick attribute, and the event handler is the alert function which alerts "Hello" to the user. While this works, it's an abysmal way to achieve this functionality for a couple of reasons:
 
-1. 首先，我们把视图代码（HTML）和行为代码（JS） 混在一起了。这意味着每单我们需要更新功能，我们不得不编辑 HTML 代码，这是一个很糟的实现，很难维护。
-2. 其次，它不可拓展。如果我们想把这个功能绑定到许多按钮上，不仅会写一大堆的重复代码使得页面变得臃肿，而且还破坏了可维护性。
+- 1.First, we're coupling our view code (HTML) with our interaction code (JS). That means that whenever we need to update functionality, we'd have to edit our HTML which is just a bad practice and a maintenance nightmare.
+- 2.Second, it's not scalable. If you had to attach this functionality onto numerous buttons, you'd not only bloat the page with a bunch of repetitious code, but you would again destroy maintainability.
+
+我们想要监听的事件由这个按钮的`onclick` 属性指定， 事件处理函数即这个`alert` 函数会弹出 “Hello” 给用户。虽然这种写法有用，但这项功能的这种实现方式是极糟糕的，原因如下：
+
+- 1. 首先，我们把视图代码（HTML）和行为代码（JS） 混在一起了。这意味着每当我们需要更新功能，我们不得不编辑 HTML 代码，这是一个很糟的实现，很难维护。
+- 2. 其次，它不可拓展。如果我们想把这个功能绑定到许多按钮上，不仅需要写一大堆的重复代码使得页面变得臃肿，而且还破坏了可维护性。
 
 Utilizing inline event handlers like this can be considered *obtrusive JavaScript,* but its opposite, *unobtrusive JavaScript* is a much more common way of discussing the topic. The notion of *unobtrusive JavaScript* is that your HTML and JS are kept separate and are therefore more maintainable. Separation of concerns is important because it keeps like pieces of code together (i.e. HTML, JS, CSS) and unlike pieces of code apart, facilitating changes, enhancements, etc. Furthermore, unobtrusive JavaScript stresses the importance of adding the least amount of cruft to a page as possible. If a user's browser doesn't support JavaScript, then it shouldn't be intertwined into the markup of the page. Also, to prevent naming collisions, JS code should utilize a single namespace for different pieces of functionality or libraries. jQuery is a good example of this, in that the `jQuery` object/constructor (and also the `$` alias to `jQuery`) only utilizes a single global variable, and all of jQuery's functionality is packaged into that one object.
 
+像这样使用*行内的事件处理*被认为是*obstrusive JavaScript*。它的对立面，*unobsrusive JavaScript* 是事件处理中更常用的方式。*unobstrusive JavaScript* 的概念指的是 HTML 和 JS 代码分离，因而更易于维护。 关注点分离是很重要的，因为它使得相似的代码片段（即 HTML, JS, CSS）放在一起，不同的代码分离开，有利于修改和优化。另外，*unobsrusive JavaScript*  强调尽可能少地往页面内添加代码。 如果用户的浏览器不支持 JavaScript, 那么JavaScript 代码就不应该混杂在页面的标记语言（HTML）中。同时，为了防止命名冲突，JS 代码应该为不同的功能代码或类库代码使用命名空间。jQuery 是这方面的一个好例子。在 `jQuery` 对象/构造函数 （以及别名`$` ）中只使用一个全局变量，jQuery 所有的功能都打包在这一个对象中。
+
 To accomplish the desired task unobtrusively, let's change our HTML a little bit by removing the `onclick` attribute and replacing it with an `id`, which we'll utilize to "hook onto" the button from within a script file.
+
+为了低调地完成这个任务，让我们稍微修改一下 HTML 代码，删除`onclick` 属性，替换为 `id` 属性。稍后我们会在一个脚本文件中用这个`id` 与按钮关联。
 
 ```html
 <button id="helloBtn">Say hello</button>
@@ -37,9 +54,12 @@ To accomplish the desired task unobtrusively, let's change our HTML a little bit
 
 If we wanted to be informed when a user clicks on that button unobtrusively, we might do something like the following in a separate script file:
 
+如果想在用户点击这个按钮后收到通知，我们应该在一个单独的脚本文件中这样写：
+
 ```javascript
 // Event binding using addEventListener
 var helloBtn = document.getElementById( "helloBtn" );
+
 helloBtn.addEventListener( "click", function( event ) {
 	alert( "Hello." );
 }, false );
@@ -47,6 +67,8 @@ helloBtn.addEventListener( "click", function( event ) {
 
 
 Here we're saving a reference to the button element by calling `getElementById` and assigning its return value to a variable. We then call `addEventListener` and provide an event handler function that will be called whenever that event occurs. While there's nothing wrong with this code as it will work fine in modern browsers, it won't fare well in versions of IE prior to IE9. This is because Microsoft chose to implement a different method, `attachEvent`, as opposed to the W3C standard `addEventListener`, and didn't get around to changing it until IE9 was released. For this reason, it's beneficial to utilize jQuery because it abstracts away browser inconsistencies, allowing developers to use a single API for these types of tasks, as seen below.
+
+这里我们通过调用`getElementById`并把它的返回值赋值给一个变量，从而保存了这个按钮元素的引用。然后，我们调用`addEventListener`，并提供了一个当这个事件发生时将会执行的事件处理函数。虽然，在现在浏览器中这段代码能很好地执行，但它不兼容于 IE 9 之前的 IE 浏览器。这是因为微软选择使用不同的方法，即`attachEvent`, 以区别于 W3C 的标准 `addEventListener`。 直到 IE 9 的发布，才设法解决了这个问题。因此，使用 jQuery 是有帮助的。 因为它处理了浏览器间的不一致，允许开发者使用一个简单的 API 处理这些任务，如下所示：
 
 ```javascript
 // Event binding using a convenience method
@@ -57,42 +79,55 @@ $( "#helloBtn" ).click(function( event ) {
 
 The `$( "#helloBtn" )` code selects the button element using the `$` (a.k.a. `jQuery`) function and returns a jQuery object. The jQuery object has a bunch of methods (functions) available to it, one of them named `click`, which resides in the jQuery object's prototype. We call the `click` method on the jQuery object and pass along an anonymous function event handler that's going to be executed when a user clicks the button, alerting "Hello." to the user.
 
+ `$( "#helloBtn" )` 使用 `$` (即 `jQuery`) 函数来选择按钮元素，返回一个 jQuery 对象。这个 jQuery 对象有大量可用的方法（函数），其中一个叫做`click`的方法，在 jQuery 对象的原型（prototype）上。我们在 jQuery 对象上调用这个 `click` 方法，并且传递了一个匿名的事件处理函数。当用户点击按钮时，将会执行这个匿名的事件处理函数，弹出 "Hello" 给用户。
+
 There are a number of ways that events can be listened for using jQuery:
+
+使用 jQuery 有许多种方式可以监听事件：
 
 ```javascript
 // The many ways to bind events with jQuery
-// Attach an event handler directly to the button using jQuery's
-// shorthand `click` method.
+// jQuery 有许多方式可以绑定事件
+
+// Attach an event handler directly to the button using jQuery's shorthand `click` method.
+// 1.使用 jQuery 的快捷方法`click`，直接绑定事件到按钮上。
 $( "#helloBtn" ).click(function( event ) {
     alert( "Hello." );
 });
 // Attach an event handler directly to the button using jQuery's
 // `bind` method, passing it an event string of `click`
+// 2.使用 jQuery 的 `bind` 的方法，传递`click` 事件字符串作为参数，直接绑定事件到按钮上。
 $( "#helloBtn" ).bind( "click", function( event ) {
     alert( "Hello." );
 });
-// As of jQuery 1.7, attach an event handler directly to the button
-// using jQuery's `on` method.
+
+// As of jQuery 1.7, attach an event handler directly to the button using jQuery's `on` method.
+// 3. 从 jQuery 1.7 开始， 使用 jQuery 的 `on` 的方法，直接绑定事件到按钮上。
 $( "#helloBtn" ).on( "click", function( event ) {
     alert( "Hello." );
 });
-// As of jQuery 1.7, attach an event handler to the `body` element that
-// is listening for clicks, and will respond whenever *any* button is
-// clicked on the page.
+// As of jQuery 1.7, attach an event handler to the `body` element that is listening for clicks, and will respond whenever *any* button is clicked on the page.
+// 4. 从 jQuery 1.7 开始，将绑定事件到监听`click`事件的`body` 元素上，在这个页面内的任何按钮点击，都会做出响应。
 $( "body" ).on({
     click: function( event ) {
         alert( "Hello." );
     }
 }, "button" );
+
 // An alternative to the previous example, using slightly different syntax.
+// 上一个例子的另一种写法，使用了稍微不同的语法。
 $( "body" ).on( "click", "button", function( event ) {
     alert( "Hello." );
 });
 ```
 
-As of jQuery 1.7, all events are bound via the `on` method, whether you call it directly or whether you use an alias/shortcut method such as `bind` or `click`, which are mapped to the `on` method internally. With this in mind, it's beneficial to use the `on`method because the others are all just syntactic sugar, and utilizing the `on` method is going to result in faster and more consistent code.
+As of jQuery 1.7, all events are bound via the `on` method, whether you call it directly or whether you use an alias/shortcut method such as `bind` or `click`, which are mapped to the `on` method internally. With this in mind, it's beneficial to use the `on` method because the others are all just syntactic sugar, and utilizing the `on` method is going to result in faster and more consistent code.
+
+从 jQuery 1.7 版开始，无论直接调用 `on`还是使用 `bind` 或 `click`等别名/快捷方法（这些方法在内部映射到`on`方法），所有事件都是通过`on`方法绑定的。记住这点，使用`on`方法很有帮助，因为所有其他方法都只是语法糖，使`on`方法代码执行更快，且代码前后更一致。
 
 Let's look at the `on` examples from above and discuss their differences. In the first example, a string of `click` is passed as the first argument to the `on` method, and an anonymous function is passed as the second. This looks a lot like the `bind` method before it. Here, we're attaching an event handler directly to `#helloBtn`. If there were any other buttons on the page, they wouldn't alert "Hello" when clicked because the event is only attached to `#helloBtn`.
+
+让我们来看看上面的 `on` 方法的例子，讨论它们的区别。在第一个例子中，`click` 字符串作为第一个参数传入 `on` 方法，一个匿名函数作为第二个参数。这有点儿类似它前一个例子中的 `bind` 方法。这里我们直接将事件处理函数绑定到 `#helloBtn`。 如果页面内有其他的按钮，它们被点击时不会弹出 "Hello"，因为这个事件只绑定到了 `#helloBtn` 。
 
 In the second `on` example, we're passing an object (denoted by the curly braces `{}`), which has a property of `click` whose value is an anonymous function. The second argument to the `on` method is a jQuery selector string of `button`. While examples 1–3 are functionally equivalent, example 4 is different in that the `body` element is listening for click events that occur on *any* button element, not just `#helloBtn`. The final example above is exactly the same as the one preceding it, but instead of passing an object, we pass an event string, a selector string, and the callback. Both of these are examples of event delegation, a process by which an element higher in the DOM tree listens for events occurring on its children.
 
@@ -149,3 +184,5 @@ $( "form" ).on( "submit", function( event ) {
     // Make an AJAX request to submit the form data
 });
 ```
+
+本文翻译自[http://learn.jquery.com/](http://learn.jquery.com/events/introduction-to-events/)
